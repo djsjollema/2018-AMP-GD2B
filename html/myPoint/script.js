@@ -4,8 +4,13 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let myPoint = new Point(100,200);
-myPoint.draw();
 
-let myOtherPoint = new Point(300,500);
-myOtherPoint.draw();
+
+for (let i = 0; i < 100; i++) {
+  let myPoint = new Point(randomNumber(canvas.width),randomNumber(canvas.height),"#" + Math.floor(randomNumber(255*255*255)).toString(16));
+  myPoint.draw();
+}
+
+function randomNumber(max){
+  return Math.random()*max;
+}
