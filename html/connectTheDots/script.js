@@ -13,8 +13,19 @@ for (var i = 0; i < 8; i++) {
 
 function animate(){
   requestAnimationFrame(animate);
+  context.beginPath();
+  context.moveTo(dots[0].x,dots[0].y);
   for (var i = 0; i < dots.length; i++) {
-    dots[i].draw()
+    context.lineWidth = 2;
+    context.lineTo(dots[i].x,dots[i].y);
+
+  }
+  context.closePath();
+  context.stroke();
+
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].draw();
+    dots[i].printText(i);
   }
 }
 
