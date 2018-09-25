@@ -7,6 +7,7 @@ let kineticObject = {};
 
 function setUp(){
   kineticObject.point = new Point(200,300,10,"blue");
+  kineticObject.pos = new Vector2d(500,100);
 
   animate()
 }
@@ -14,6 +15,7 @@ function setUp(){
 function animate(){
   context.clearRect(0,0,canvas.width,canvas.height)
   requestAnimationFrame(animate);
+  kineticObject.point.position(kineticObject.pos);
   kineticObject.point.draw(context);
 }
 
