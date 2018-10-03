@@ -2,7 +2,6 @@ body{
   background-color: lemonchiffon;
   margin: 0;
   overflow: hidden;
-  cursor: url(media/crosshair.png) 25 25,auto;
 }
 
 #canvas{
