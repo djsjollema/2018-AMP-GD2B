@@ -18,9 +18,11 @@ function animate(){
   context.clearRect(0,0,canvas.width,canvas.height);
   requestAnimationFrame(animate);
   context.beginPath();
+  context.fillStyle = "rgba(255,0,0,0.2)";
   context.moveTo(dragPoint.x,dragPoint.y);
   context.lineTo(otherDragPoint.x,otherDragPoint.y);
   context.lineTo(anOtherOtherPoint.x,anOtherOtherPoint.y);
+  context.fill();
   context.closePath();
   context.stroke();
 
