@@ -8,12 +8,21 @@ let B = new Point(600,300,20,"blue");
 let C = new Point(200,500,20,"green");
 let D = new Point(600,100,20,"orange");
 
+let l = new LinearFunction(1,1);
+let m = new LinearFunction(1,1);
+
 A.drag(); B.drag();C.drag();D.drag();
 
 function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,canvas.width,canvas.height);
 
+  l.defineLineWithTwoPoint(A,B);
+  l.draw(context);
+
+  m.defineLineWithTwoPoint(C,D);
+  m.draw(context);
+  
   A.draw(context);
   B.draw(context);
   C.draw(context);
