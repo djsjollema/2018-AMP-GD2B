@@ -7,8 +7,8 @@ canvas.height = window.innerHeight;
 
 function animate(){
   requestAnimationFrame(animate);
-  let myPoint = new Point(randomNumber(canvas.width),randomNumber(canvas.height),"#" + Math.floor(randomNumber(255*255*255)).toString(16));
-  myPoint.draw();
+  let myPoint = new Point(randomNumber(canvas.width),randomNumber(canvas.height),20,"#" + Math.floor(randomNumber(255*255*255)).toString(16));
+  myPoint.draw(context);
 }
 
 animate();

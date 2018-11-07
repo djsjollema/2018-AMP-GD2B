@@ -28,7 +28,7 @@ function animate(){
   context.fill();
   context.stroke();
   for (var i = 0; i < dots.length; i++) {
-    dots[i].draw();
+    dots[i].draw(context);
     dots[i].printText(i);
   }
 }
@@ -40,6 +40,6 @@ function randomNumber(max){
 }
 
 function addPoint(){
-  let dot = new Point(randomNumber(canvas.width),randomNumber(canvas.height),"#" + Math.floor(randomNumber(255*255*255)).toString(16));
+  let dot = new Point(randomNumber(canvas.width),randomNumber(canvas.height),30,"#" + Math.floor(randomNumber(255*255*255)).toString(16));
   dots.push(dot);
 }

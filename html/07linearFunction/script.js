@@ -14,7 +14,7 @@ function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,canvas.width,canvas.height);
 
-  l.defineLineWithTwoPoint(A,B);
+  l.defineLineWithTwoPoints(A,B);
 
   C.x = 0; C.y = l.calcY(0);
   D.x = canvas.width; D.y = l.calcY(canvas.width);
