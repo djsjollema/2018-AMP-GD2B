@@ -1,3 +1,34 @@
 body{
   background-color: aliceblue;
+  height: 100%;
+}
+
+#container{
+  width: 100%;
+  height: 800px;
+  background-color: orange;
+  display:grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 100%;
+}
+
+#myMenu{
+  background-color: gray;
+  color:white;
+  grid-column: 1/2;
+}
+
+#myMenu a{
+  color: yellow;
+  text-decoration: none;
+}
+
+#myMenu ol{
+  list-style-type: none;
+}
+
+#myIframe{
+  grid-column: 2/3;
+  width: 100%;
+  height: 100%;
 }
