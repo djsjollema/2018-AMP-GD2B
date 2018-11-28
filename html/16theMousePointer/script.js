@@ -4,6 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let temp = 0;
 let mouse = {};
+let angle = 0;
 
 let midX = canvas.width/2;
 let midY = canvas.height/2;
@@ -13,10 +14,15 @@ function animate(){
   context.clearRect(0,0,canvas.width,canvas.height);
   context.save();
   context.translate(midX,midY);
-  context.rotate(temp);
+  if(mouse.x > midX){
+    angle = Math.atan((mouse.y-midY)/(mouse.x-midX));
+  } else {
+    angle = Math.atan((mouse.y-midY)/(mouse.x-midX)) + Math.PI;
+  }
+
+  context.rotate(angle);
   drawArrow();
   context.restore();
-  temp += 0.1;
 }
 
 animate();
