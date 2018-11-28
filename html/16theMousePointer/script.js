@@ -11,14 +11,13 @@ let midY = canvas.height/2;
 
 function animate(){
   requestAnimationFrame(animate);
-  context.clearRect(0,0,canvas.width,canvas.height);
+  //context.clearRect(0,0,canvas.width,canvas.height);
+  context.fillStyle = "rgba(255,255,255,0.2)";
+  context.fillRect(0,0,canvas.width,canvas.height);
   context.save();
   context.translate(midX,midY);
-  if(mouse.x > midX){
-    angle = Math.atan((mouse.y-midY)/(mouse.x-midX));
-  } else {
-    angle = Math.atan((mouse.y-midY)/(mouse.x-midX)) + Math.PI;
-  }
+
+  angle = Math.atan2((mouse.y-midY),(mouse.x-midX));
 
   context.rotate(angle);
   drawArrow();
