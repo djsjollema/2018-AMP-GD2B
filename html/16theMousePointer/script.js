@@ -5,6 +5,7 @@ canvas.height = window.innerHeight;
 let temp = 0;
 let mouse = {};
 let angle = 0;
+let line = new LinearFunction(1,1);
 
 let midX = canvas.width/2;
 let midY = canvas.height/2;
@@ -16,12 +17,14 @@ function animate(){
   context.fillRect(0,0,canvas.width,canvas.height);
   context.save();
   context.translate(midX,midY);
-
   angle = Math.atan2((mouse.y-midY),(mouse.x-midX));
-
   context.rotate(angle);
   drawArrow();
   context.restore();
+
+  line.slope = (mouse.y-midY)/(mouse.x-midX);
+  line.intercept = midY - midX*line.slope;
+  line.draw(context)
 }
 
 animate();
