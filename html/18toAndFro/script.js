@@ -6,6 +6,7 @@ canvas.height = window.innerHeight;
 let player = {};
 let A = {};
 let B = {};
+let goToA = false;
 
 
 function setup(){
@@ -26,7 +27,24 @@ function setup(){
 function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,canvas.width,canvas.height);
-  player.vel.diffenceVector(player.pos,B.pos);
+
+  if(goToA){
+    player.vel.diffenceVector(player.pos,A.pos);
+    if(player.point.distanceToAnOtherPoint(A.point)<1){
+      console.log('ben er');
+      goToA = false;
+    }
+  } else {
+    player.vel.diffenceVector(player.pos,B.pos);
+    if(player.point.distanceToAnOtherPoint(B.point)<1){
+      goToA = true;
+    }
+  }
+
+
+
+
+
 
 
   A.point.draw(context);
@@ -34,7 +52,12 @@ function animate(){
   player.point.draw(context);
   player.pos.draw(context,0,0,1);
   B.pos.draw(context,0,0,1);
-  player.vel.draw(context,player.pos.dx,player.pos.dy,1);
+  player.vel.r = 1;
+  player.pos.add(player.vel);
+  player.point.position(player.pos)
+
+
+  player.vel.draw(context,player.pos.dx,player.pos.dy,50);
 }
 
 setup();
