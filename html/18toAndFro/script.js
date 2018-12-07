@@ -26,6 +26,7 @@ function setup(){
 function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,canvas.width,canvas.height);
+  player.vel.diffenceVector(player.pos,B.pos);
 
 
   A.point.draw(context);
@@ -33,6 +34,7 @@ function animate(){
   player.point.draw(context);
   player.pos.draw(context,0,0,1);
   B.pos.draw(context,0,0,1);
+  player.vel.draw(context,player.pos.dx,player.pos.dy,1);
 }
 
 setup();
