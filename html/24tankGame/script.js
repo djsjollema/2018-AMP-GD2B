@@ -2,10 +2,14 @@ class Tank {
   constructor() {
     this.image= new Image();
     this.image.src = "Tanks_sheet.png";
+    this.counter=23;
   }
 
   draw(){
-    context.drawImage(this.image,2*32,0,32,32,0,0,64,64);
+    let sx,sy,sw,sh;
+    sx = this.counter % 8 * 32;
+    sy = Math.floor(this.counter/8)*32;
+    context.drawImage(this.image,sx,sy,32,32,0,0,64,64);
   }
 }
 
