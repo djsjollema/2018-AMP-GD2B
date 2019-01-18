@@ -6,7 +6,7 @@ class Tank {
     this.startFrame = 1;
     this.stopFrame = 8;
     this.pos = new Vector2d(100,100);
-    this.vel = new Vector2d(1,1);
+    this.vel = new Vector2d(1,2);
   }
 
   move(){
@@ -54,10 +54,22 @@ function animate(){
   if(dt > 1/frameRate){
     greenTank.move();
     startTime = new Date();
+    //greenTank.vel.angle += 0.01;
   }
 
   greenTank.draw();
 
 }
+
+addEventListener('keydown',(evt)=>{
+  switch (evt.key) {
+    case "ArrowLeft":
+      greenTank.vel.angle -= 0.1;
+
+      break;
+    default:
+
+  }
+})
 
 setup();
