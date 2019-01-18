@@ -10,7 +10,7 @@ let numOfCols, maxCells,image;
 
 function setup(){
   startTime = new Date();
-  frameRate = 2; //frames per second
+  frameRate = 10; //frames per second
   counter = 0;
   sw = 100;
   sh = 100;
