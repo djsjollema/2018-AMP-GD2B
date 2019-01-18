@@ -6,7 +6,7 @@ class Tank {
     this.startFrame = 1;
     this.stopFrame = 8;
     this.pos = new Vector2d(100,100);
-    this.vel = new Vector2d(0,5);
+    this.vel = new Vector2d(1,1);
   }
 
   move(){
@@ -21,7 +21,11 @@ class Tank {
     let sx,sy;
     sx = this.counter % 8 * 32;
     sy = Math.floor(this.counter/8)*32;
-    context.drawImage(this.image,sx,sy,32,32,this.pos.dx,this.pos.dy,64,64);
+    context.save();
+    context.translate(this.pos.dx,this.pos.dy);
+    context.rotate(this.vel.angle + Math.PI/2);
+    context.drawImage(this.image,sx,sy,32,32,-16,-16,64,64);
+    context.restore();
   }
 }
 
