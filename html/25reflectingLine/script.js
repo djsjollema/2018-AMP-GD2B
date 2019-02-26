@@ -3,12 +3,15 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let A,B,l,m,player;
+let A,B,l,m,player,S;
 
 function setup(){
   A = new Point(100,100,10,"yellow");
   B = new Point(700,300,10,"lightgreen");
+  S = new Point(0,0,10,"white");
+
   l = new LinearFunction(1,1);
+  m = new LinearFunction(1,1);
   A.drag();
   B.drag();
   player = {};
@@ -25,8 +28,17 @@ function animate(){
   l.defineLineWithTwoPoints(A,B);
   l.draw(context);
 
+  m.slope = -1 / l.slope;
+  m.intercept = player.position.dy - player.position.dx*m.slope;
+  m.draw(context);
+
   A.draw(context);
   B.draw(context);
+
+  S.x = l.intersection(m).x;
+  S.y = l.intersection(m).y;
+  S.draw(context);
+
 
   player.position.add(player.velocity);
   player.point.x = player.position.dx;
