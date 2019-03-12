@@ -15,6 +15,7 @@ function setup(){
   m = new LinearFunction(1,1);
 
   a = new Vector2d(C.x-A.x,C.y-A.y);
+  b = new Vector2d(a.dy,-a.dx)
 
   animate();
 }
@@ -26,13 +27,21 @@ function animate(){
   //context.clearRect(0,0,canvas.width,canvas.height);
   vector.dx = B.x - A.x;vector.dy = B.y - A.y;
   a.dx = C.x - A.x;a.dy = C.y - A.y;
+  b.dx = -a.dy; b.dy = a.dx;
 
   l.defineLineWithTwoPoints(A,C);
   m.slope = -1/l.slope;
   m.intercept = A.y - m.slope*A.x;
 
   vector.draw(context,A.x,A.y,1);
+  a.r = 1;
+  b.r = 1;
+
+  a.r = vector.dot(a);
+  b.r = vector.dot(b);
+
   a.draw(context,A.x,A.y,1);
+  b.draw(context,A.x,A.y,1);
 
 
 
