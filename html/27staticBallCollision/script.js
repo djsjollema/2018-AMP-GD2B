@@ -43,6 +43,10 @@ function animate(){
   j.r = player.vel.dot(j);
   i.r = player.vel.dot(i);
 
+  if(A.distanceToAnOtherPoint(player.point)<A.r + player.point.r){
+    console.log('hallo');
+  }
+
   l.defineLineWithTwoPoints(A,player.point);
   l.draw(context);
 
