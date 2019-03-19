@@ -44,7 +44,8 @@ function animate(){
   i.r = player.vel.dot(i);
 
   if(A.distanceToAnOtherPoint(player.point)<A.r + player.point.r){
-    console.log('hallo');
+    j.angle += Math.PI;
+    player.vel.sumVector(i,j);
   }
 
   l.defineLineWithTwoPoints(A,player.point);
