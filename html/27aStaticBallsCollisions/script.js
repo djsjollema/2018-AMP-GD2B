@@ -37,9 +37,20 @@ function animate(){
     bumpers[i].i.dx = bumpers[i].x - player.pos.dx;
     bumpers[i].i.dy = bumpers[i].y - player.pos.dy;
 
-    bumpers[i].i.r = 1;
+    if(bumpers[i].i.r < 5+20){
+      bumpers[i].i.r = 1;
+      bumpers[i].j.dx = bumpers[i].i.dy;
+      bumpers[i].j.dy = -bumpers[i].i.dx;
+      bumpers[i].j.r = 1;
+      bumpers[i].i.r = player.vel.dot(bumpers[i].i);
+      bumpers[i].j.r = player.vel.dot(bumpers[i].j);
+      bumpers[i].i.angle += Math.PI;
+      player.vel.sumVector(bumpers[i].i,bumpers[i].j);
+    }
 
-    bumpers[i].i.draw(context,player.pos.dx,player.pos.dy,100);
+
+
+    //bumpers[i].i.draw(context,player.pos.dx,player.pos.dy,100);
 
     bumpers[i].draw(context);
   }
