@@ -3,7 +3,7 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let A,player,l;
+let A,player,l,m;
 
 function setup(){
   player = {};
@@ -12,6 +12,7 @@ function setup(){
   player.point = new Point(player.pos.dx,player.pos.dy,20,"yellow");
   A = new Point(canvas.width/2,canvas.height/2,200,"gray");
   l = new LinearFunction(1,0);
+  m = new LinearFunction(1,0);
   animate();
 }
 
@@ -31,6 +32,11 @@ function animate(){
 
   l.defineLineWithTwoPoints(A,player.point);
   l.draw(context);
+
+  m.draw(context);
+  m.slope = -1/l.slope;
+  m.intercept = player.point.y - m.slope*player.point.x;
+  
 
   player.pos.add(player.vel);
   player.point.position(player.pos);
