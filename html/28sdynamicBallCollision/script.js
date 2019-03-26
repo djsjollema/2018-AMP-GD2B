@@ -5,10 +5,11 @@ canvas.height = window.innerHeight;
 
 let gameObj1 = {};
 let gameObj2 = {};
+let temp;
 
 function setup(){
   gameObj1.pos = new Vector2d(200,200);
-  gameObj1.vel = new Vector2d(2,3);
+  gameObj1.vel = new Vector2d(7,8);
   gameObj1.point = new Point(0,0,150,"yellow");
   gameObj1.point.position(gameObj1.pos);
   gameObj1.rad = new Vector2d(1,1);
@@ -53,8 +54,8 @@ function animate(){
   gameObj1.rad.diffenceVector(gameObj1.pos,gameObj2.pos);
   gameObj2.rad.diffenceVector(gameObj2.pos,gameObj1.pos);
 
-  gameObj1.vel.draw(context,gameObj1.point.x,gameObj1.point.y,50);
-  gameObj2.vel.draw(context,gameObj2.point.x,gameObj2.point.y,50);
+  gameObj1.vel.draw(context,gameObj1.point.x,gameObj1.point.y,20);
+  gameObj2.vel.draw(context,gameObj2.point.x,gameObj2.point.y,20);
 
   if(gameObj1.rad.r < gameObj1.point.r + gameObj2.point.r){
     // magnitude rad vector = 1
@@ -68,14 +69,27 @@ function animate(){
     gameObj2.tan.dx = gameObj2.rad.dy;
     gameObj2.tan.dy = -gameObj2.rad.dx;
 
+    gameObj1.rad.r = gameObj1.rad.dot(gameObj1.vel);
+    gameObj1.tan.r = gameObj1.tan.dot(gameObj1.vel);
+    gameObj2.rad.r = gameObj2.rad.dot(gameObj2.vel);
+    gameObj2.tan.r = gameObj2.tan.dot(gameObj2.vel);
+
+    //exchange rad components
+    temp = gameObj1.rad;
+    gameObj1.rad = gameObj2.rad;
+    gameObj2.rad = temp;
+
+    //construct new velocity vector
+    gameObj1.vel.sumVector(gameObj1.rad,gameObj1.tan);
+    gameObj2.vel.sumVector(gameObj2.rad,gameObj2.tan);
 
   }
 
-  gameObj1.rad.draw(context,gameObj1.point.x,gameObj1.point.y,1);
-  gameObj2.rad.draw(context,gameObj2.point.x,gameObj2.point.y,1);
+  //gameObj1.rad.draw(context,gameObj1.point.x,gameObj1.point.y,1);
+  //gameObj2.rad.draw(context,gameObj2.point.x,gameObj2.point.y,1);
 
-  gameObj1.tan.draw(context,gameObj1.point.x,gameObj1.point.y,1);
-  gameObj2.tan.draw(context,gameObj2.point.x,gameObj2.point.y,1);
+  //gameObj1.tan.draw(context,gameObj1.point.x,gameObj1.point.y,1);
+  //gameObj2.tan.draw(context,gameObj2.point.x,gameObj2.point.y,1);
 }
 
 setup();
