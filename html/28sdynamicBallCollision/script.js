@@ -49,11 +49,13 @@ function animate(){
   gameObj2.point.draw(context);
 
   gameObj1.rad.diffenceVector(gameObj1.pos,gameObj2.pos);
+  gameObj2.rad.diffenceVector(gameObj2.pos,gameObj1.pos);
 
   gameObj1.vel.draw(context,gameObj1.point.x,gameObj1.point.y,50);
   gameObj2.vel.draw(context,gameObj2.point.x,gameObj2.point.y,50);
 
   gameObj1.rad.draw(context,gameObj1.point.x,gameObj1.point.y,1)
+  gameObj2.rad.draw(context,gameObj2.point.x,gameObj2.point.y,1)
 
 }
 
