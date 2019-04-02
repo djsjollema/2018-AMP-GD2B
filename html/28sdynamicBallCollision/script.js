@@ -3,24 +3,21 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let gameObj1 = {};
-let gameObj2 = {};
+let gameObjects = [];
+let numGameObjects = 10;
 let temp;
 
 function setup(){
-  gameObj1.pos = new Vector2d(200,200);
-  gameObj1.vel = new Vector2d(7,8);
-  gameObj1.point = new Point(0,0,150,"yellow");
-  gameObj1.point.position(gameObj1.pos);
-  gameObj1.rad = new Vector2d(1,1);
-  gameObj1.tan = new Vector2d(1,1);
-
-  gameObj2.pos = new Vector2d(600,300);
-  gameObj2.vel = new Vector2d(2,-3);
-  gameObj2.point = new Point(0,0,150,"pink");
-  gameObj2.point.position(gameObj2.pos);
-  gameObj2.rad = new Vector2d(1,1);
-  gameObj2.tan = new Vector2d(1,1);
+  for(let i = 0; i<numGameObjects; i++){
+    gameObject = {}
+    gameObject.pos = new Vector2d(grn(canvas.width),grn(canvas.height));
+    gameObject.vel = new Vector2d(grn(5),grn(5));
+    gameObject.point = new Point(0,0,30,"yellow");
+    gameObject.point.position(gameObject.pos);
+    gameObject.rad = new Vector2d(1,1);
+    gameObject.tan = new Vector2d(1,1);
+    gameObjects.push(gameObject);
+  }
   animate();
 }
 
@@ -29,67 +26,53 @@ function animate(){
   context.fillStyle = "rgba(255,255,255,0.3)";
   context.fillRect(0,0,canvas.width,canvas.height);
 
-  gameObj1.pos.add(gameObj1.vel);
-  gameObj2.pos.add(gameObj2.vel);
+  for(let i = 0; i<gameObjects.length;i++){
+    let gameObject = gameObjects[i];
 
+    boxing(gameObject);
 
-  if(gameObj1.pos.dx<gameObj1.point.r || gameObj1.pos.dx > canvas.width - gameObj1.point.r){
-    gameObj1.vel.dx = - gameObj1.vel.dx;
-  }
-  if(gameObj1.pos.dy<gameObj1.point.r || gameObj1.pos.dy > canvas.height - gameObj1.point.r){
-    gameObj1.vel.dy = - gameObj1.vel.dy;
-  }
-  if(gameObj2.pos.dx<gameObj2.point.r || gameObj2.pos.dx > canvas.width - gameObj2.point.r){
-    gameObj2.vel.dx = - gameObj2.vel.dx;
-  }
-  if(gameObj2.pos.dy<gameObj2.point.r || gameObj2.pos.dy > canvas.height - gameObj2.point.r){
-    gameObj2.vel.dy = - gameObj2.vel.dy;
-  }
-  gameObj1.point.position(gameObj1.pos);
-  gameObj1.point.draw(context);
+    for(let j = 0; j<gameObjects.length; j++){
+      if(i != j){
+        let rad = new Vector2d(1,1);
+        rad.diffenceVector(gameObjects[i].pos,gameObjects[j].pos);
+        ;
+        rad.draw(context,gameObjects[i].pos.dx,gameObject.pos.dy,1);
+        // if(gameObjects[i].r<60){
+        //   gameObjects[j].rad.diffenceVector(gameObjects[j].pos,gameObjects[i].pos)
+        //   gameObjects[i].ra.r = 1;
+        //   gameObjects[j].r = 1;
+        //
+        // }
+      }
+    }
 
-  gameObj2.point.position(gameObj2.pos);
-  gameObj2.point.draw(context);
-
-  gameObj1.rad.diffenceVector(gameObj1.pos,gameObj2.pos);
-  gameObj2.rad.diffenceVector(gameObj2.pos,gameObj1.pos);
-
-  gameObj1.vel.draw(context,gameObj1.point.x,gameObj1.point.y,20);
-  gameObj2.vel.draw(context,gameObj2.point.x,gameObj2.point.y,20);
-
-  if(gameObj1.rad.r < gameObj1.point.r + gameObj2.point.r){
-    // magnitude rad vector = 1
-    gameObj1.rad.r = 1;
-    gameObj2.rad.r = 1;
-
-    // tan perpedicular to rad
-    gameObj1.tan.dx = gameObj1.rad.dy;
-    gameObj1.tan.dy = -gameObj1.rad.dx;
-
-    gameObj2.tan.dx = gameObj2.rad.dy;
-    gameObj2.tan.dy = -gameObj2.rad.dx;
-
-    gameObj1.rad.r = gameObj1.rad.dot(gameObj1.vel);
-    gameObj1.tan.r = gameObj1.tan.dot(gameObj1.vel);
-    gameObj2.rad.r = gameObj2.rad.dot(gameObj2.vel);
-    gameObj2.tan.r = gameObj2.tan.dot(gameObj2.vel);
-
-    //exchange rad components
-    temp = gameObj1.rad;
-    gameObj1.rad = gameObj2.rad;
-    gameObj2.rad = temp;
-
-    //construct new velocity vector
-    gameObj1.vel.sumVector(gameObj1.rad,gameObj1.tan);
-    gameObj2.vel.sumVector(gameObj2.rad,gameObj2.tan);
-
+    gameObject.pos.add(gameObject.vel);
+    gameObject.point.position(gameObject.pos);
+    gameObject.point.draw(context);
   }
 
-  //gameObj1.rad.draw(context,gameObj1.point.x,gameObj1.point.y,1);
-  //gameObj2.rad.draw(context,gameObj2.point.x,gameObj2.point.y,1);
-
-  //gameObj1.tan.draw(context,gameObj1.point.x,gameObj1.point.y,1);
-  //gameObj2.tan.draw(context,gameObj2.point.x,gameObj2.point.y,1);
 }
 
 setup();
+
+function grn(max){
+  return Math.floor(Math.random()*max);
+}
+
+function boxing(gameObject){
+  if(gameObject.pos.dx < gameObject.point.r){
+    gameObject.vel.dx = Math.abs(gameObject.vel.dx);
+  }
+
+  if(gameObject.pos.dx > canvas.width - gameObject.point.r){
+    gameObject.vel.dx = - Math.abs(gameObject.vel.dx);
+  }
+
+  if(gameObject.pos.dy < gameObject.point.r){
+    gameObject.vel.dy = Math.abs(gameObject.vel.dy);
+  }
+
+  if(gameObject.pos.dy > canvas.height - gameObject.point.r){
+    gameObject.vel.dy = - Math.abs(gameObject.vel.dy);
+  }
+}
