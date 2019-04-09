@@ -6,4 +6,5 @@ body{
 
 #canvas{
   background-color: aliceblue;
+  cursor: crosshair;
 }

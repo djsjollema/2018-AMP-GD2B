@@ -6,7 +6,7 @@ let screenW = canvas.width;
 let screenH = canvas.height;
 
 let balls = [];
-let numBalls = 20;
+let numBalls =50;
 
 
 
@@ -15,7 +15,7 @@ function setup(){
     let ball = {};
     ball.pos = new Vector2d(grn(screenW),grn(screenH));
     ball.vel = new Vector2d(grn(5),grn(5));
-    ball.point = new Point(ball.pos.dx,ball.pos.dy,20,"yellow");
+    ball.point = new Point(ball.pos.dx,ball.pos.dy,10,"#191970");
     ball.rad = new Vector2d(1,1);
     ball.tan = new Vector2d(1,-1);
 
@@ -41,6 +41,7 @@ function animate(){
         //balls[i].rad.draw(context,balls[i].pos.dx,balls[i].pos.dy,1,"green");
         if(balls[i].rad.r < balls[i].point.r + balls[j].point.r){
           let temp;
+          balls[i].pos.sub(balls[i].vel);
           balls[i].rad.r = 1;
           balls[i].tan.dx = balls[i].rad.dy;
           balls[i].tan.dy = -balls[i].rad.dx;
